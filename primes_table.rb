@@ -23,6 +23,11 @@ class PrimesTable
     current = @primes.last
     found = false
 
+    # Since our is_prime? fn
+    # takes n time, this will take
+    # O(mn) time, where m represents
+    # the count of numbers between 
+    # two primes.
     while !found
       current += 1
       if self.is_prime? current
@@ -34,6 +39,16 @@ class PrimesTable
     current
   end
 
+  # This is O(n) time, since
+  # we're checking all the numbers
+  # beneath n. 
+  # But it's portable and doesn't 
+  # depend on this class for execution.
+  #
+  # I did look for a better answer, 
+  # and found one on StackOverflow -- 
+  # essentially, we'd only test numbers
+  # from the sqrt of n down to 2.
   def is_prime?(n)
     return false if n <= 1
 
@@ -46,12 +61,14 @@ class PrimesTable
     true
   end
 
+  # O(n^2) time, where n is 
+  # the number of primes.
   def get_table_rows
     rows = @primes
     columns = @primes
     products = []
 
-    rows.each_with_index do |row_number, index|
+    rows.each do |row_number|
       row = []
       columns.each do |column_number|
         row << column_number * row_number
@@ -63,12 +80,15 @@ class PrimesTable
   end
 
   def print_table(rows)
+    # We want to find the max column size first...
     max_item_length = rows.last.last.to_s.length
     column_size = max_item_length
 
+    # The headers should be just another row to 
+    # #print_row, but we need something to keep 
+    # the top left corner clear.
     headers = @primes
     headers.unshift(' ')
-
     rows.unshift(headers)
 
     rows.each_with_index do |row, index|
@@ -81,10 +101,13 @@ class PrimesTable
   end
 
   def print_row(row, col_size)
+    # then we'll use the column size as a prefix
+    # filler, so the numbers are right-justified
+    # like a calculator.
     row.each do |element|
-      printable = element.to_s
-      filler = col_size - printable.length
-      print "#{printable}#{' ' * filler} "
+      num_string = element.to_s
+      filler = col_size - num_string.length
+      print "#{' ' * filler}#{num_string} "
     end
     print "\n"
   end

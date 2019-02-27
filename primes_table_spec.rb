@@ -2,7 +2,7 @@ require_relative './primes_table.rb'
 
 describe 'class PrimeTable' do 
   describe '#find_next_prime' do 
-    it 'finds the prime after the given prime' do 
+    it 'finds the prime after the last found prime' do 
       pt = PrimesTable.new
       expect(pt.find_next_prime).to eq 2
       expect(pt.find_next_prime).to eq 3
