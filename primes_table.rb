@@ -111,4 +111,10 @@ class PrimesTable
     end
     print "\n"
   end
+
+  def print_n_primes(n)
+    self.find_n_primes n
+    rows = self.get_table_rows
+    self.print_table rows 
+  end
 end

@@ -52,5 +52,13 @@ describe 'class PrimeTable' do
       expect {pt.print_table rows}.to output(expected_output).to_stdout
     end
   end
+
+  describe '#print_n_primes' do 
+    it 'calls all the necessary methods for you' do 
+      pt = PrimesTable.new
+      expected_output = "  2 3 \n2 4 6 \n3 6 9 \n"
+      expect {pt.print_n_primes 2}.to output(expected_output).to_stdout
+    end
+  end
 end
 
